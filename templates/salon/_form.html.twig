@@ -1,0 +1,7 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+<div class="float-right">
+    <a class="btn btn-secondary" href="{{ path('salon_index') }}">Back</a>
+    <button  class="btn btn-success">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_end(form) }}

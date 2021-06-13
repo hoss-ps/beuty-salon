@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Salon's List{% endblock %}
+
+{% block body %}
+
+     <div class="float-right mb-5 mt-5">
+        {{ include('salon/_search_form.html.twig') }}
+        <a class="btn inline btn-success" href="{{ path('salon_new') }}"><i class="fas fa-plus"></i></a>
+    </div>
+
+
+    <table class="table" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>{{ knp_pagination_sortable(salons, 'Name', 'salon.name') }}</th>
+            <th>Street</th>
+            <th>Zip</th>
+            <th>{{ knp_pagination_sortable(salons, 'City', 'salon.city') }}</th>
+            <th>{{ knp_pagination_sortable(salons, 'Email', 'salon.email') }}</th>
+            <th>Phone</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% set counter = 0 %}
+        {% for salon in salons %}
+            {% set counter = counter + 1 %}
+            <tr>
+                <td>{{ counter }}</td>
+                <td>{{ salon.name }}</td>
+                <td>{{ salon.street }}</td>
+                <td>{{ salon.zip }}</td>
+                <td>{{ salon.city }}</td>
+                <td>{{ salon.email }}</td>
+                <td>{{ salon.phone }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('salon_show', {'id': salon.id}) }}"><i
+                                class="far fa-eye"></i></a>
+                    <a class="btn btn-success" href="{{ path('salon_edit', {'id': salon.id}) }}"><i
+                                class="fas fa-edit"></i></a>
+                    {{ include('salon/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation float-right mt-5">
+        {{ knp_pagination_render(salons) }}
+    </div>
+{% endblock %}
